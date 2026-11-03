@@ -1,6 +1,6 @@
 # Yunzhu Transit Extension Mod
 フォーク元：https://github.com/Yunzhu-Dev/Yunzhu-Transit-Extension 
-# このリポジトリはフォークされています。プログラムを改変したい場合は<br>フォーク元のリポジトリをフォークすることを<br>強くお勧めします。 
+# このリポジトリはフォークされています。<br>プログラムを改変したい場合は、<br>フォーク元のリポジトリをフォークすることを<br>強くお勧めします。 
 [简体中文](./README_zh-cn.md) | **[English](./README.md)**
 
 **Yunzhu Transit Extension** is a decorative add-on for
