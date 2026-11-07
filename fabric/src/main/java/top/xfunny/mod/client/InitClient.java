@@ -345,6 +345,16 @@ public final class InitClient {
         REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB679_BUTTON, RenderHitachiVIB679Button::new);
         REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB673_BUTTON, RenderHitachiVIB673Button::new);
         REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB673_BUTTON_HIP43, RenderHitachiVIB673ButtonHIP43::new);
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_HIP43, dispatcher -> new RenderHitachiVIB673ButtonHIP43<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_ANTIBACTERIAL_35, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_STAINLESS_35, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_PREMIUM_35, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_50, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_35, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_SQUARE_35, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_STAINLESS_35, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
+        REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_STAINLESS_SQUARE_35, dispatcher -> new RenderHitachiVIB673Button<>(dispatcher, -0.2F / 16));
         REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_HB673_BUTTON, RenderHitachiHB673Button::new);
         REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB181A_BUTTON, RenderHitachiVIB181AButton::new);
         REGISTRY_CLIENT.registerBlockEntityRenderer(BlockEntityTypes.HITACHI_VIB182A_BUTTON, RenderHitachiVIB182AButton::new);

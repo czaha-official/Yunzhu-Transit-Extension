@@ -119,6 +119,8 @@ public class LinkerValidTypes {
             HitachiVIB679Button.class,
             HitachiVIB673Button.class,
             HitachiVIB673ButtonHIP43.class,
+            HitachiVIB15Button.class,
+            HitachiVIB15ButtonHIP43.class,
             HitachiHB673Button.class,
             HitachiVIB681Button.class,
             HitachiVIB676Button.class,

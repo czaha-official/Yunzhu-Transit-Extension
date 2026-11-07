@@ -323,6 +323,16 @@ public class Blocks {
     public static final BlockRegistryObject HITACHI_VIB679_BUTTON = BlockFixtures.get("hitachi_vib679_button_1");
     public static final BlockRegistryObject HITACHI_VIB673_BUTTON = BlockFixtures.get("hitachi_vib673_button_1");
     public static final BlockRegistryObject HITACHI_VIB673_BUTTON_HIP43 = BlockFixtures.get("hitachi_vib673_button_1_hip43");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON = BlockFixtures.get("hitachi_vib15_button_1");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_HIP43 = BlockFixtures.get("hitachi_vib15_button_1_hip43");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_ANTIBACTERIAL_35 = BlockFixtures.get("hitachi_vib15_button_1_antibacterial_35");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_STAINLESS_35 = BlockFixtures.get("hitachi_vib15_button_1_stainless_35");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_PREMIUM_35 = BlockFixtures.get("hitachi_vib15_button_1_premium_35");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_CLEAR_50 = BlockFixtures.get("hitachi_vib15_button_1_clear_50");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_CLEAR_35 = BlockFixtures.get("hitachi_vib15_button_1_clear_35");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_CLEAR_SQUARE_35 = BlockFixtures.get("hitachi_vib15_button_1_clear_square_35");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_CLEAR_STAINLESS_35 = BlockFixtures.get("hitachi_vib15_button_1_clear_stainless_35");
+    public static final BlockRegistryObject HITACHI_VIB15_BUTTON_CLEAR_STAINLESS_SQUARE_35 = BlockFixtures.get("hitachi_vib15_button_1_clear_stainless_square_35");
     public static final BlockRegistryObject HITACHI_HB673_BUTTON = BlockFixtures.get("hitachi_hb673_button_1");
     public static final BlockRegistryObject HITACHI_VIB181A_BUTTON = BlockFixtures.get("hitachi_vib181a_button_1");
     public static final BlockRegistryObject HITACHI_VIB182A_BUTTON = BlockFixtures.get("hitachi_vib182a_button_1");

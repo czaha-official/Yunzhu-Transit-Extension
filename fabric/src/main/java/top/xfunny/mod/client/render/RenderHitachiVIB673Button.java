@@ -32,8 +32,9 @@ import java.util.Comparator;
 
 import static top.xfunny.mod.client.font.FontFeatures.ss01;
 
-public class RenderHitachiVIB673Button extends BlockEntityRenderer<HitachiVIB673Button.BlockEntity> implements DirectionHelper, IGui, IBlock {
+public class RenderHitachiVIB673Button<T extends LiftButtonsBase.BlockEntityBase> extends BlockEntityRenderer<T> implements DirectionHelper, IGui, IBlock {
 
+    private final float floorDisplayYOffset;
     private static final int HOVER_COLOR = 0xAAFFFFFF;
     private static final int PRESSED_COLOR = 0xFFFFFFFF;
     private static final int DEFAULT_COLOR = 0x00FFFFFF;
@@ -45,11 +46,16 @@ public class RenderHitachiVIB673Button extends BlockEntityRenderer<HitachiVIB673
     private static final BooleanProperty UNLOCKED = BooleanProperty.of("unlocked");
 
     public RenderHitachiVIB673Button(Argument dispatcher) {
+        this(dispatcher, 0);
+    }
+
+    public RenderHitachiVIB673Button(Argument dispatcher, float floorDisplayYOffset) {
         super(dispatcher);
+        this.floorDisplayYOffset = floorDisplayYOffset;
     }
 
     @Override
-    public void render(HitachiVIB673Button.BlockEntity blockEntity, float tickDelta, @NotNull GraphicsHolder graphicsHolder1, int light, int overlay) {
+    public void render(T blockEntity, float tickDelta, @NotNull GraphicsHolder graphicsHolder1, int light, int overlay) {
         final World world = blockEntity.getWorld2();
         if (world == null) {
             return;
@@ -208,7 +214,7 @@ public class RenderHitachiVIB673Button extends BlockEntityRenderer<HitachiVIB673
                 liftFloorDisplayView.setWidth(1.43F / 16);
                 liftFloorDisplayView.setHeight(1.7F / 16);
 
-                liftFloorDisplayView.setMargin(0.01F, 0, 0, 0);
+                liftFloorDisplayView.setMargin(0.01F, floorDisplayYOffset, 0, 0);
                 liftFloorDisplayView.setTextAlign(TextView.HorizontalTextAlign.CENTER);
                 liftFloorDisplayView.addStoredMatrixTransformations(graphicsHolder -> graphicsHolder.translate(0, 0, -SMALL_OFFSET));
                 if (liftFloorDisplayView.getTextLength() >= 3) {

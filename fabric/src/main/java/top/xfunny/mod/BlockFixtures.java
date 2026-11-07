@@ -302,6 +302,16 @@ public final class BlockFixtures {
         add("hitachi_vib679_button_1", () -> new Block(new HitachiVIB679Button()));
         add("hitachi_vib673_button_1", () -> new Block(new HitachiVIB673Button()));
         add("hitachi_vib673_button_1_hip43", () -> new Block(new HitachiVIB673ButtonHIP43()));
+        add("hitachi_vib15_button_1", () -> new Block(new HitachiVIB15Button()));
+        add("hitachi_vib15_button_1_hip43", () -> new Block(new HitachiVIB15ButtonHIP43()));
+        add("hitachi_vib15_button_1_antibacterial_35", () -> new Block(new HitachiVIB15Button(() -> BlockEntityTypes.HITACHI_VIB15_BUTTON_ANTIBACTERIAL_35.get())));
+        add("hitachi_vib15_button_1_stainless_35", () -> new Block(new HitachiVIB15Button(() -> BlockEntityTypes.HITACHI_VIB15_BUTTON_STAINLESS_35.get())));
+        add("hitachi_vib15_button_1_premium_35", () -> new Block(new HitachiVIB15Button(() -> BlockEntityTypes.HITACHI_VIB15_BUTTON_PREMIUM_35.get())));
+        add("hitachi_vib15_button_1_clear_50", () -> new Block(new HitachiVIB15Button(() -> BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_50.get())));
+        add("hitachi_vib15_button_1_clear_35", () -> new Block(new HitachiVIB15Button(() -> BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_35.get())));
+        add("hitachi_vib15_button_1_clear_square_35", () -> new Block(new HitachiVIB15Button(() -> BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_SQUARE_35.get())));
+        add("hitachi_vib15_button_1_clear_stainless_35", () -> new Block(new HitachiVIB15Button(() -> BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_STAINLESS_35.get())));
+        add("hitachi_vib15_button_1_clear_stainless_square_35", () -> new Block(new HitachiVIB15Button(() -> BlockEntityTypes.HITACHI_VIB15_BUTTON_CLEAR_STAINLESS_SQUARE_35.get())));
         add("hitachi_hb673_button_1", () -> new Block(new HitachiHB673Button()));
         add("hitachi_vib181a_button_1", () -> new Block(new HitachiVIB181AButton()));
         add("hitachi_vib182a_button_1", () -> new Block(new HitachiVIB182AButton()));

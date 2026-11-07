@@ -29,8 +29,9 @@ import top.xfunny.mod.util.ReverseRendering;
 
 import java.util.Comparator;
 
-public class RenderHitachiVIB673ButtonHIP43 extends BlockEntityRenderer<HitachiVIB673ButtonHIP43.BlockEntity> implements DirectionHelper, IGui, IBlock {
+public class RenderHitachiVIB673ButtonHIP43<T extends LiftButtonsBase.BlockEntityBase> extends BlockEntityRenderer<T> implements DirectionHelper, IGui, IBlock {
 
+    private final float floorDisplayYOffset;
     private static final int HOVER_COLOR = 0xAAFFFFFF;
     private static final int PRESSED_COLOR = 0xFFFFFFFF;
     private static final int DEFAULT_COLOR = 0x00FFFFFF;
@@ -42,11 +43,16 @@ public class RenderHitachiVIB673ButtonHIP43 extends BlockEntityRenderer<HitachiV
     private static final BooleanProperty UNLOCKED = BooleanProperty.of("unlocked");
 
     public RenderHitachiVIB673ButtonHIP43(Argument dispatcher) {
+        this(dispatcher, 0);
+    }
+
+    public RenderHitachiVIB673ButtonHIP43(Argument dispatcher, float floorDisplayYOffset) {
         super(dispatcher);
+        this.floorDisplayYOffset = floorDisplayYOffset;
     }
 
     @Override
-    public void render(HitachiVIB673ButtonHIP43.BlockEntity blockEntity, float tickDelta, GraphicsHolder graphicsHolder1, int light, int overlay) {
+    public void render(T blockEntity, float tickDelta, GraphicsHolder graphicsHolder1, int light, int overlay) {
         final World world = blockEntity.getWorld2();
         if (world == null) {
             return;
@@ -205,7 +211,7 @@ public class RenderHitachiVIB673ButtonHIP43 extends BlockEntityRenderer<HitachiV
                 liftFloorDisplayView.setWidth(1.5F / 16);
                 liftFloorDisplayView.setHeight(1.7F / 16);
 
-                liftFloorDisplayView.setMargin(-0.125F / 16, 0, 0.125F / 16, 0);
+                liftFloorDisplayView.setMargin(-0.125F / 16, floorDisplayYOffset, 0.125F / 16, 0);
                 liftFloorDisplayView.setTextAlign(TextView.HorizontalTextAlign.RIGHT);
                 liftFloorDisplayView.addStoredMatrixTransformations(graphicsHolder -> graphicsHolder.translate(0, 0, -SMALL_OFFSET));
 
