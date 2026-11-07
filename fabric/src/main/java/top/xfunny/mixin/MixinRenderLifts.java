@@ -19,13 +19,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.xfunny.mod.block.LiftTrackMagneticVane;
-import top.xfunny.mod.lift.LiftDoorState;
-import top.xfunny.mod.lift.LiftDisplayDirection;
-import top.xfunny.mod.util.LiftTrackMagneticVaneDisplayHelper;
+import top.xfunny.mod.util.ClientGetLiftDetails;
 
 @Mixin(value = RenderLifts.class, remap = false)
 public abstract class MixinRenderLifts {
@@ -34,18 +31,15 @@ public abstract class MixinRenderLifts {
     private static final ModelSmallCube YTE_MAGNETIC_VANE_MARKER = new ModelSmallCube(
             new Identifier("textures/block/lapis_block.png"));
 
-    @ModifyArg(method = "lambda$render$6", at = @At(value = "INVOKE",
-            target = "Lorg/mtr/mod/model/ModelLift1;render(Lorg/mtr/mod/render/StoredMatrixTransformations;Lorg/mtr/core/data/NameColorDataBase;Lorg/mtr/mapping/holder/Identifier;IFFZIIZZZZZ)V",
-            remap = false), index = 4)
-    private static float yte$doorValueRight(float original) {
-        return original * (float) LiftDoorState.DOOR_MAX_OPEN_SCALE;
-    }
-
-    @ModifyArg(method = "lambda$render$6", at = @At(value = "INVOKE",
-            target = "Lorg/mtr/mod/model/ModelLift1;render(Lorg/mtr/mod/render/StoredMatrixTransformations;Lorg/mtr/core/data/NameColorDataBase;Lorg/mtr/mapping/holder/Identifier;IFFZIIZZZZZ)V",
-            remap = false), index = 5)
-    private static float yte$doorValueLeft(float original) {
-        return original * (float) LiftDoorState.DOOR_MAX_OPEN_SCALE;
+    // Car and hall-button displays share this live-floor entry point. Keep
+    // getLiftDetails itself unchanged: panels and lanterns also query real floors.
+    @Redirect(
+            method = "renderLiftDisplay",
+            at = @At(value = "INVOKE", target = "Lorg/mtr/mod/render/RenderLifts;getLiftDetails(Lorg/mtr/mapping/holder/World;Lorg/mtr/core/data/Lift;Lorg/mtr/mapping/holder/BlockPos;)Lorg/mtr/libraries/it/unimi/dsi/fastutil/objects/ObjectObjectImmutablePair;")
+    )
+    private static ObjectObjectImmutablePair<LiftDirection, ObjectObjectImmutablePair<String, String>> yte$renderLiveFloor(
+            World world, Lift lift, BlockPos blockPos) {
+        return ClientGetLiftDetails.getLiftDetails(world, lift, blockPos);
     }
 
     @Inject(method = "render", at = @At("TAIL"))
@@ -76,25 +70,5 @@ public abstract class MixinRenderLifts {
                 }
             }
         });
-    }
-
-    @Inject(method = "getLiftDetails", at = @At("RETURN"), cancellable = true)
-    private static void yte$useMagneticVaneForDisplay(
-            World world, Lift lift, BlockPos blockPos,
-            CallbackInfoReturnable<ObjectObjectImmutablePair<LiftDirection,
-                    ObjectObjectImmutablePair<String, String>>> cir) {
-        // Only replace the live car display. Calls using a hall track position
-        // must keep returning that hall's real floor for arrival-lantern checks.
-        if (!blockPos.equals(org.mtr.mod.Init.positionToBlockPos(lift.getCurrentFloor().getPosition()))) {
-            return;
-        }
-        final LiftTrackMagneticVane.BlockEntity magneticVane = LiftTrackMagneticVaneDisplayHelper.getDisplayedMagneticVane(world, lift);
-        if (magneticVane != null) {
-            ((LiftDisplayDirection) lift).yte$resetArrivalDirectionDelay();
-        }
-        if (magneticVane != null) {
-            cir.setReturnValue(new ObjectObjectImmutablePair<>(lift.getDirection(),
-                    new ObjectObjectImmutablePair<>(magneticVane.getFloorNumber(), magneticVane.getFloorDescription())));
-        }
     }
 }

@@ -16,18 +16,34 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import top.xfunny.mod.lift.LiftModeState;
 import top.xfunny.mod.item.YteGroupLiftButtonsLinker;
 import top.xfunny.mod.item.YteLiftButtonsLinker;
+import top.xfunny.mod.util.ClientGetLiftDetails;
 
 @Mixin(value = RenderLiftPanel.class, remap = false)
 public class MixinRenderLiftPanel {
+
+    // 第一处调用：大数字（lift panel 所在楼层），只做 service mode 处理，不做磁隔板替换。
     @Redirect(
             method = "render",
-            at = @At(value = "INVOKE", target = "Lorg/mtr/mod/render/RenderLifts;getLiftDetails(Lorg/mtr/mapping/holder/World;Lorg/mtr/core/data/Lift;Lorg/mtr/mapping/holder/BlockPos;)Lorg/mtr/libraries/it/unimi/dsi/fastutil/objects/ObjectObjectImmutablePair;")
+            at = @At(value = "INVOKE", target = "Lorg/mtr/mod/render/RenderLifts;getLiftDetails(Lorg/mtr/mapping/holder/World;Lorg/mtr/core/data/Lift;Lorg/mtr/mapping/holder/BlockPos;)Lorg/mtr/libraries/it/unimi/dsi/fastutil/objects/ObjectObjectImmutablePair;", ordinal = 0)
     )
-    private ObjectObjectImmutablePair<LiftDirection, ObjectObjectImmutablePair<String, String>> yte$renderBlankDriverModeDisplay(
+    private ObjectObjectImmutablePair<LiftDirection, ObjectObjectImmutablePair<String, String>> yte$renderPanelFloorNumber(
             World world, Lift lift, BlockPos blockPos) {
         return LiftModeState.getMode(lift.getId()) == LiftModeState.LiftMode.ATTENDANT
                 ? new ObjectObjectImmutablePair<>(LiftDirection.NONE, new ObjectObjectImmutablePair<>("", ""))
                 : RenderLifts.getLiftDetails(world, lift, blockPos);
+    }
+
+    // 第二处调用：滚动显示（电梯当前位置），做 service mode 处理 + 磁隔板替换。
+    @Redirect(
+            method = "render",
+            at = @At(value = "INVOKE", target = "Lorg/mtr/mod/render/RenderLifts;getLiftDetails(Lorg/mtr/mapping/holder/World;Lorg/mtr/core/data/Lift;Lorg/mtr/mapping/holder/BlockPos;)Lorg/mtr/libraries/it/unimi/dsi/fastutil/objects/ObjectObjectImmutablePair;", ordinal = 1)
+    )
+    private ObjectObjectImmutablePair<LiftDirection, ObjectObjectImmutablePair<String, String>> yte$renderPanelLiveFloor(
+            World world, Lift lift, BlockPos blockPos) {
+        if (YteLiftConfigStore.getServiceMode(lift.getId()).hidesHallDisplay()) {
+            return new ObjectObjectImmutablePair<>(LiftDirection.NONE, new ObjectObjectImmutablePair<>("", ""));
+        }
+        return ClientGetLiftDetails.getLiftDetails(world, lift, blockPos);
     }
 
     @ModifyVariable(
